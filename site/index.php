@@ -52,8 +52,6 @@
 
 		</div>
 	</div>
-
-
 	<?include ("site/easy_learn_info.php")?>
 </div>
 </body>
