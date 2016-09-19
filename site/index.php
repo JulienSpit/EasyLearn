@@ -26,9 +26,9 @@
 	<div class="ui inverted menu">
 		<div class="header item">EasyLearn®</div>
 		<div class="item">
-			<form class="ui form" id="formLogout">
+			<!--<form class="ui form" id="formLogout">
 				<div class="ui submit button">Déconnexion</div>
-			</form>
+			</form>-->
 		</div>
 		<div class="right item">
 			<form id="formLogin" class="ui form">
@@ -40,7 +40,7 @@
 						<input type="password" name="password" placeholder="Password" />
 					</div>
 					<div class="field">
-						<div class="ui submit button">Connexion</div>
+						<div class="ui submit green button">Connexion</div>
 					</div>
 				</div>
 			</form>

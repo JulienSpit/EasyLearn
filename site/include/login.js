@@ -1,22 +1,32 @@
-/**
- * Created by julienspitaleri on 19/09/2016.
- */
+
 $(function () {
-	$("#formLogin").on('submit', function (e) {
-		$("#formLogin input").each(function (){
-			if($(this).val() == ""){
-				$(this).addClass("has-error");
-			}
-		});
-			/*$.post(
-				"login.php",
-				{
-					login:
-				}
-			);*/
+	$("#formLogin").form({
+		fields:{
+			login: "empty",
+			password: "empty"
+		},
+		onFailure: function (error, fields) {
+			console.log(fields);
+		},
+		onSuccess: function (e, fields) {
 			e.preventDefault();
-			console.log($(this));
+			console.log(fields);
+			$.post(
+				 "login.php",
+				 {
+				 	login: fields.login,
+				 	password: fields.password
+				 },
+				function (data) {
+					alert ("oui ");
+					console.log(data);
+				},
+				"json"
+			 );
 
-
+		}
 	});
+
+
+
 });
