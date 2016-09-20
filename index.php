@@ -1,3 +1,1 @@
-<?php      
-  include("site/index.php");   
-?>
+site/index.php
