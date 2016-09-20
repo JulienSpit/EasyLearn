@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <script type="text/javascript">
 	var vitesse = 100;
 	var opacity = 0;
@@ -81,4 +82,26 @@
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
+=======
+	<h2 class="ui header">
+		<i class="chevron circle right icon"></i>
+		<div class="content">
+			Comment ça marche ?
+		</div>
+	</h2>
+	<div class="ui segment">
+		<img class="ui small left floated image" src="/EasyLearn/site/images/learn">
+		<p class="large text">Si vous avez besoin d'un coach pour vous épauler dans votre apprentissage, EasyLearn® est fait pour vous. Avec son programme spécial, cette plateforme en ligne va vous permettre de mémoriser facilement le vocabulaire, dates et réponses que votre esprit ne semble pas vouloir retenir malgré tous vos efforts.</p>
+		<img class="ui small right floated image" src="/EasyLearn/site/images/books">
+		<p>Créez vos propres listes d'apprentissage et apprenez via les nombreux types d'exercice que nous vous proposons. Vous pouvez également partager vos listes avec les autres membres du site et découvrir les leurs afin de vous enrichir d'avantage. Alors, qu'attendez-vous pour commencer ?</p>
+	</div>
+	<div class="ui vertical segment">
+		<img class="ui centered medium image" src="/EasyLearn/site/images/cesi">
+	</div>
+=======
+<div class="ui header">
+	<h1>EasyLearn® c'est quoi ?</h1>
+>>>>>>> Stashed changes
+>>>>>>> 6f38727c2d54026531c356da424aedb361ef1d16
 </div>
