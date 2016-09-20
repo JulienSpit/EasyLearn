@@ -1,28 +1,77 @@
 
 $(function () {
+	// par defaut on masque le boutton de deconnexion
+	$("#formLogout").parent().hide();
+
+	// validation formulaire connexion
 	$("#formLogin").form({
+		on:"submit",
 		fields:{
-			login: "empty",
-			password: "empty"
+			login: {
+				identifier: 'login',
+				rules: [{
+					type: 'empty'
+				}]
+			},
+			password: {
+				identifier: 'password',
+				rules: [{
+					type: 'empty'
+				}]
+			}
 		},
 		onFailure: function (error, fields) {
-			console.log(fields);
+			return false;
 		},
-		onSuccess: function (e, fields) {
-			e.preventDefault();
-			console.log(fields);
+		onSuccess: function (event, fields) {
+
 			$.post(
-				 "login.php",
+				 "site/login.php",
 				 {
-				 	login: fields.login,
-				 	password: fields.password
+				 	login: $("#formLogin input[name='login']").val(),
+				 	password: $("#formLogin input[name='password']").val()
 				 },
 				function (data) {
-					alert ("oui ");
-					console.log(data);
+					if(data["result"] == true){
+						$("#formLogin").parent().hide();
+						$("#formLogout").parent().prepend("<span>Bonjour "+data['login']+" !</span>");
+						$("#formLogout input[name='login']").val(data["login"]);
+						$("#formLogout").parent().show();
+					}
+
 				},
 				"json"
 			 );
+<<<<<<< Updated upstream
 		}
 	});
+=======
+			event.preventDefault();
+		}
+	});
+
+	$("#formLogout").form({
+		on: "submit",
+		onSuccess: function (event) {
+			$.post(
+				"site/login.php",
+				{
+					login: $("#formLogout input[name='login']").val()
+				},
+				function (data) {
+					if(data["result"] == true){
+						$("#formLogout").parent().hide();
+						$("#formLogout").parent().find("span").remove();
+						$("#formLogin").parent().show();
+					}
+
+				},
+				"json"
+			);
+			event.preventDefault();
+		}
+
+	});
+
+>>>>>>> Stashed changes
 });

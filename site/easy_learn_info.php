@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <script type="text/javascript">
 	var vitesse = 100;
 	var opacity = 0;
@@ -74,4 +75,8 @@
 	<div class="ui vertical segment">
 		<img class="ui centered medium image" src="/EasyLearn/site/images/cesi">
 	</div>
+=======
+<div class="ui header">
+	<h1>EasyLearn® c'est quoi ?</h1>
+>>>>>>> Stashed changes
 </div>

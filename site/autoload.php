@@ -1,5 +1,5 @@
 <?php
-
+define("APP_PATH", "/Applications/MAMP/htdocs/EasyLearn/site");
 session_start();
 
 function __autoload($class_name){
@@ -10,4 +10,3 @@ function __autoload($class_name){
     }
 }
 
-$bd = new Bd(APP_PATH.'/DataBase.db');
