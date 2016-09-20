@@ -22,6 +22,7 @@ if(!empty($_POST["login"]) && !empty($_POST["password"])){
 }
 //deconnexion
 else if(!empty($_POST["login"])){
-
+	$retour->result = true;
+	echo json_encode($retour);
 }
 

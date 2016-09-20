@@ -82,8 +82,6 @@
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
-=======
 	<h2 class="ui header">
 		<i class="chevron circle right icon"></i>
 		<div class="content">
@@ -99,9 +97,3 @@
 	<div class="ui vertical segment">
 		<img class="ui centered medium image" src="/EasyLearn/site/images/cesi">
 	</div>
-=======
-<div class="ui header">
-	<h1>EasyLearn® c'est quoi ?</h1>
->>>>>>> Stashed changes
->>>>>>> 6f38727c2d54026531c356da424aedb361ef1d16
-</div>

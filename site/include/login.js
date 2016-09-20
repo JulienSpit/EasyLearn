@@ -42,10 +42,6 @@ $(function () {
 				},
 				"json"
 			 );
-<<<<<<< Updated upstream
-		}
-	});
-=======
 			event.preventDefault();
 		}
 	});
@@ -70,8 +66,5 @@ $(function () {
 			);
 			event.preventDefault();
 		}
-
 	});
-
->>>>>>> Stashed changes
 });
