@@ -1,3 +1,3 @@
 <?php
-	include ("site/include/header.php");
+	include ("page.php");
 ?>

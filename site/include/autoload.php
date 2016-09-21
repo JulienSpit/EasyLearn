@@ -9,5 +9,6 @@ function __autoload($class_name){
         }
     }
 }
-
-$bd = new Bd(APP_PATH.'/DataBase.db');
+if(!isset($bd)) {
+	$bd = new Bd(APP_PATH . '/DataBase.db');
+}

@@ -1,6 +1,3 @@
-<?php
-require_once ("site/autoload.php");
-?>
 <!doctype html>
 <head>
 	<meta charset="utf-8">
@@ -9,32 +6,37 @@ require_once ("site/autoload.php");
 	<meta name="description" content="EasyLearn - La plateforme d'apprentissage en ligne">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="site/include/semantic.min.css">
-	<link rel="stylesheet" href="site/include/style.css">
+	<link rel="stylesheet" href="/EasyLearn/site/include/semantic.min.css">
+	<link rel="stylesheet" href="/EasyLearn/site/include/style.css">
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-	<script src="site/include/semantic.min.js"></script>
-	<script src="site/include/login.js"></script>
+	<script src="/EasyLearn/site/include/semantic.min.js"></script>
+	<script src="/EasyLearn/site/include/login.js"></script>
+	<script src="/EasyLearn/site/include/menu.js"></script>
 
 </head>
 <body>
 <div class="container">
 	<?/* menu horizontale */?>
-	<div class="ui inverted menu">
-		<div class="item">
-			<div class="labeled icon">
-				<i class="student icon"></i>
-				EasyLearn®
+	<div class="ui inverted menu" id="horizMenu">
+		<a class="item" href="/EasyLearn/">
+			<div class="menu">
+				<div class="vertically fitted borderless item">
+					<div class="labeled icon">
+						<i class="student icon"></i>
+						EasyLearn®
+					</div>
+				</div>
+				<div class="vertically fitted borderless item sousmenu">
+					La plateforme d'apprentissage en ligne
+				</div>
 			</div>
-			<div>
-				La plateforme d'apprentissage en ligne
-			</div>
-		</div>
+		</a>
 
 		<div class="right broderless item">
 			<form class="ui form" id="formLogout">
-				<input type="hidden" name="login" value=""/>
+				<input type="hidden" name="mode" value="deconnexion"/>
 				<div class="ui submit button">Déconnexion</div>
 			</form>
 		</div>
@@ -52,30 +54,8 @@ require_once ("site/autoload.php");
 			</form>
 		</div>
 		<div class="item">
-			<div class="ui button">
+			<div class="ui primary button">
 				<a href="site/login.php">Créer un compte</a>
 			</div>
 		</div>
 	</div>
-	<div class="ui stakcable grid">
-		<?/* menu verticale */?>
-		<div class="three wide column">
-			<div class="ui vertical fluid tabular menu">
-				<a class="ui header active item">
-					Accueil
-				</a>
-				<a class="ui header item">
-					Apprendre
-				</a>
-				<a class="ui header item">
-					Mes listes
-				</a>
-				<a class="ui header item">
-					Mes résultats
-				</a>
-			</div>
-		</div>
-		<div class="thirteen wide stretched column">
-			<?/* page au contenu dymanique */
-				include ("site/accueil.php");
-			?>

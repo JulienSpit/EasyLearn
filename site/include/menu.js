@@ -1,0 +1,3 @@
+$(function (){
+	$("#vertMenu .item").tab();
+});
