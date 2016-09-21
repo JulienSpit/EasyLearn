@@ -10,6 +10,7 @@ require_once ("site/autoload.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" href="site/include/semantic.min.css">
+	<link rel="stylesheet" href="site/include/style.css">
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -19,6 +20,7 @@ require_once ("site/autoload.php");
 </head>
 <body>
 <div class="container">
+	<?/* menu horizontale */?>
 	<div class="ui inverted menu">
 		<div class="item">
 			<div class="labeled icon">
@@ -55,3 +57,25 @@ require_once ("site/autoload.php");
 			</div>
 		</div>
 	</div>
+	<div class="ui stakcable grid">
+		<?/* menu verticale */?>
+		<div class="three wide column">
+			<div class="ui vertical fluid tabular menu">
+				<a class="ui header active item">
+					Accueil
+				</a>
+				<a class="ui header item">
+					Apprendre
+				</a>
+				<a class="ui header item">
+					Mes listes
+				</a>
+				<a class="ui header item">
+					Mes résultats
+				</a>
+			</div>
+		</div>
+		<div class="thirteen wide stretched column">
+			<?/* page au contenu dymanique */
+				include ("site/accueil.php");
+			?>
