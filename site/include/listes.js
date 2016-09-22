@@ -12,8 +12,9 @@ $(function () {
                                 id: $(e.target).parents("tr").data("id")
                             },
                             function (data) {
-                                console.log(data);
-
+                                if(data["result"] == true){
+                                    $(e.target).parents("tr").remove();
+                                }
                             },
                             "json"
                         );

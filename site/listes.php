@@ -1,8 +1,8 @@
-<!-- traitement des appels ajax -->
 <?php
 include_once ("include/autoload.php");
 if(isset($_POST["action"])) {
-
+    $retour = new stdClass();
+    $retour->result = false;
     switch ($_POST["action"]){
         case "supprimer":
             //$_POST["id"]
@@ -18,8 +18,11 @@ if(isset($_POST["action"])) {
                     ":id" => $_POST["id"]
                 )
             );
+            $retour->result = true;
             break;
+        default: return;
     }
+    echo json_encode($retour);
 }
 else{?>
 <div class="ui tab" data-tab="listes">
