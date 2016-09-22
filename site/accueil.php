@@ -16,7 +16,7 @@
 					</div>
 				</div>
 				<div class="column">
-					<img class="ui small circular centered image" src="images/jul.jpeg">
+					<img class="ui small circular centered image" src="images/jul.png">
 					<div class="ui header">
 						Julien SPITALERI
 					</div>

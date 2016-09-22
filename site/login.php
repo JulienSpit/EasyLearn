@@ -1,5 +1,5 @@
 <?php
-require_once ("include/autoload.php");
+include_once ("include/autoload.php");
 // si on veux se connecter ou se deconnecter
 if(isset($_POST["mode"])) {
 	$retour = new stdClass();
@@ -15,15 +15,7 @@ if(isset($_POST["mode"])) {
 				);
 				if (count($lignes) > 0) {
 					if (password_verify($_POST["password"], $lignes[0]->PWD_Print) == 1) {
-						$User = new User();
-						$User->logIn($lignes[0]->Prk_Account, $lignes[0]->Username, $lignes[0]->PWD_Print);
-						$retour->html =	"<form class='ui form' id='formLogout'>";
-						$retour->html.=		"<input type='hidden' name='mode' value='deconnexion'/>";
-						$retour->html.=		"<div class='ui submit button'>Déconnexion</div>";
-						$retour->html.=	"</form>";
-						$retour->html2 = "<div class='ui primary button'>";
-						$retour->html2.=	"<a href='site/compte.php'>Mon compte</a>";
-						$retour->html2.= "</div>";
+						$_SESSION["User"] = new User($lignes[0]->PrK_Account, $lignes[0]->Username, $_POST["password"]);
 						$retour->result = true;
 					}
 				}
@@ -31,10 +23,8 @@ if(isset($_POST["mode"])) {
 			break;
 		case "deconnexion":
 			//deconnexion
-			if (!empty($_POST["login"])) {
-				unset($User);
-				$retour->result = true;
-			}
+			$_SESSION = [];
+			$retour->result = session_destroy();
 			break;
 		case "verification":
 			if (!empty($_POST["username"])) {
@@ -74,12 +64,12 @@ if(isset($_POST["mode"])) {
 	return;
 }
 else {
-	include (APP_PATH."/include/header.php");
+	include ("include/header.php");
 	// sinon on veux afficher la page de creation de compte
 	?>
 	<div class="ui stackable grid">
 		<div class="ten wide centered column">
-			<div class="ui segment">
+			<div class="ui red segment">
 				<h1 class="ui header">
 					<div class="content">Création de compte</div>
 					<div class="sub header">Veuillez remplir les informations ci-dessous pour créer votre compte</div>
