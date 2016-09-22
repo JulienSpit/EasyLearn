@@ -14,6 +14,7 @@
 	<script src="/EasyLearn/site/include/semantic.min.js"></script>
 	<script src="/EasyLearn/site/include/login.js"></script>
 	<script src="/EasyLearn/site/include/menu.js"></script>
+	<script src="/EasyLearn/site/include/listes.js"></script>
 
 </head>
 <body>
