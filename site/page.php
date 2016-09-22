@@ -3,7 +3,7 @@ require_once ("site/include/autoload.php");
 include (APP_PATH."/include/header.php");
 ?>
 <div class="ui stackable grid">
-	<?/* menu verticale */?>
+	<?php /* menu verticale */?>
 	<div class="three wide column">
 		<div class="ui vertical fluid tabular menu" id="vertMenu">
 			<a class="ui header active item" data-tab="accueil">

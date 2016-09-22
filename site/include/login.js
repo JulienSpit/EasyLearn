@@ -1,7 +1,5 @@
 
 $(function () {
-	// par defaut on masque le boutton de deconnexion
-	$("#formLogout").parent().hide();
 
 	// validation formulaire connexion
 	$("#formLogin").form({
@@ -24,7 +22,7 @@ $(function () {
 			return false;
 		},
 		onSuccess: function (event, fields) {
-
+console.log(fields);
 			$.post(
 				 "site/login.php",
 				 {
@@ -34,41 +32,25 @@ $(function () {
 				 },
 				function (data) {
 					if(data["result"] == true){
-						$("#formLogin").parent().hide();
-						$("#formLogout").parent().prepend("<span>Bonjour "+data['login']+" !</span>");
-						$("#formLogout input[name='login']").val(data["login"]);
-						$("#formLogout").parent().show();
+						$("#formLogin").hide();
+						$("#horizMenu").find(".right.borderless.item").append(data["html"]);
+						formDeconnexion();
+						$("#horizMenu .item:last .button").hide();
+						$("#horizMenu .item:last").append(data["html2"]);
 					}
-
+					else {
+						$("#formLogin .item").addClass("error");
+					}
 				},
 				"json"
 			 );
 			event.preventDefault();
 		}
 	});
-	// formulaire de deconnexion
-	$("#formLogout").form({
-		on: "submit",
-		onSuccess: function (event) {
-			$.post(
-				"site/login.php",
-				{
-					login: $("#formLogout input[name='login']").val()
-				},
-				function (data) {
-					if(data["result"] == true){
-						$("#formLogout").parent().hide();
-						$("#formLogout").parent().find("span").remove();
-						$("#formLogin").parent().show();
-					}
 
-				},
-				"json"
-			);
-			event.preventDefault();
-		}
-	});
-
+	if($("#formLogout")){
+		formDeconnexion();
+	}
 	// formulaire de creation de compte
 	$("#newCompte").form({
 		on: "submit",
@@ -90,7 +72,7 @@ $(function () {
 			return false;
 		},
 		onSuccess: function (event, fields) {
-			verifyUsername($("#newCompte input[name='username']").val())
+			verifyUsername($("#newCompte input[name='username']").val());
 				$.post(
 					"login.php",
 					{
@@ -103,10 +85,12 @@ $(function () {
 							alert("Création réussie");
 							header.location("index.php");
 						}
+						else {
+							$("#newCompte .item").addClass("error");
+						}
 					},
 					"json"
 				);
-
 			event.preventDefault();
 		}
 	});
@@ -140,4 +124,27 @@ function verifyUsername (username){
 		},
 		"json"
 	);
+}
+
+function formDeconnexion (){
+	// formulaire de deconnexion
+	$("#formLogout").form({
+		on: "submit",
+		onSuccess: function (event) {
+			$.post(
+				"site/login.php",
+				{
+					login: $("#formLogout input[name='login']").val()
+				},
+				function (data) {
+					if(data["result"] == true){
+						$("#formLogout").remove();
+					}
+
+				},
+				"json"
+			);
+			event.preventDefault();
+		}
+	});
 }

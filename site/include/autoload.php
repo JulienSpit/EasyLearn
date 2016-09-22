@@ -1,5 +1,6 @@
 <?php
 define("APP_PATH", "/Applications/MAMP/htdocs/EasyLearn/site");
+include ("User.php");
 session_start();
 
 function __autoload($class_name){

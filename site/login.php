@@ -15,8 +15,15 @@ if(isset($_POST["mode"])) {
 				);
 				if (count($lignes) > 0) {
 					if (password_verify($_POST["password"], $lignes[0]->PWD_Print) == 1) {
-						$retour->login = $lignes[0]->Username;
-						/*$retour->password =$lignes[0]->PWD_Print;*/
+						$User = new User();
+						$User->logIn($lignes[0]->Prk_Account, $lignes[0]->Username, $lignes[0]->PWD_Print);
+						$retour->html =	"<form class='ui form' id='formLogout'>";
+						$retour->html.=		"<input type='hidden' name='mode' value='deconnexion'/>";
+						$retour->html.=		"<div class='ui submit button'>Déconnexion</div>";
+						$retour->html.=	"</form>";
+						$retour->html2 = "<div class='ui primary button'>";
+						$retour->html2.=	"<a href='site/compte.php'>Mon compte</a>";
+						$retour->html2.= "</div>";
 						$retour->result = true;
 					}
 				}
@@ -25,6 +32,7 @@ if(isset($_POST["mode"])) {
 		case "deconnexion":
 			//deconnexion
 			if (!empty($_POST["login"])) {
+				unset($User);
 				$retour->result = true;
 			}
 			break;
@@ -43,14 +51,20 @@ if(isset($_POST["mode"])) {
 			}
 			break;
 		case "creation":
-			if (!empty($_POST["login"]) && !empty($_POST["password"])) {
+			if (!empty($_POST["login"]) || !empty($_POST["password"])) {
 				$bd->query("INSERT INTO Account (PWD_Print, Username, Type) VALUES (:password, :login, 0);",
 					array(
 						":login" => $_POST["login"],
 						":password" => password_hash($_POST["password"], PASSWORD_BCRYPT)
 					)
 				);
+
+				$User = new User();
+				$User->logIn($bd->last_insert_id(), $_POST["login"], password_hash($_POST["password"], PASSWORD_BCRYPT));
 				$retour->result = true;
+			}
+			else {
+				$retour->result = false;
 			}
 			break;
 		default: return;
