@@ -5,7 +5,6 @@ if(isset($_POST["action"])) {
     $retour->result = false;
     switch ($_POST["action"]){
         case "supprimer":
-            //$_POST["id"]
             $bd->query(
                 "DELETE FROM List WHERE List.Prk_List = :id;",
                 array(
@@ -20,6 +19,20 @@ if(isset($_POST["action"])) {
             );
             $retour->result = true;
             break;
+
+        case "modifier":
+            $lignes = $bd->query(
+                "SELECT Couple.Item1, Couple.Item2 FROM Couple WHERE Couple.FrK_List = :id;",
+                array(
+                    ":id" => $_POST["id"]
+                )
+            );
+            //header tableau
+            if (count($lignes) > 0) {
+                for ($i = 0; $i < count($lignes); $i++) {
+                    //corps code
+                }
+            }
         default: return;
     }
     echo json_encode($retour);
@@ -77,7 +90,7 @@ else{?>
                                 <?php } ?>
                                 <td class="three wide center aligned">
                                     <div class="ui mini buttons">
-                                        <button class="ui button">
+                                        <button class="ui edit button">
                                             <i class="ellipsis horizontal icon"></i>
                                             Modifier
                                         </button>
@@ -106,14 +119,24 @@ else{?>
         <h2 class="ui centered header">Veuillez vous connecter afin de visualiser vos listes</h2>
     <?php }?>
 </div>
-<div class="ui modal">
-    <div class="header">Supprimer</div>
+<div class="ui modal modSuppr">
+    <div class="header">Suppression</div>
     <div class="content">
         <p>Êtes-vous sûre de vouloir supprimer cette liste ?</p>
     </div>
     <div class="actions">
         <div class="ui negative button">Non</div>
         <div class="ui right labeled icon positive button"><i class="check circle icon"></i>Oui</div>
+    </div>
+</div>
+<div class="ui modal modEdit">
+    <div class="header">Modification</div>
+    <div class="content">
+        //affichage
+    </div>
+    <div class="actions">
+        <div class="ui button">retour</div>
+        <div class="ui right labeled icon positive button"><i class="check circle icon"></i>Valider</div>
     </div>
 </div>
 <!-- end body -->
