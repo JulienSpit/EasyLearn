@@ -1,7 +1,7 @@
 $(function () {
     $(".ui.negative.button").click(
         function (e) {
-            $('.ui.modal')
+            $('.ui.modal.modSuppr')
                 .modal({
                     closable: false,
                     onApprove: function () {
@@ -24,4 +24,6 @@ $(function () {
             ;
         }
     );
+
+
 });

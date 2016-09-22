@@ -106,7 +106,7 @@ else{?>
         <h2 class="ui centered header">Veuillez vous connecter afin de visualiser vos listes</h2>
     <?php }?>
 </div>
-<div class="ui modal">
+<div class="ui modal modSuppr">
     <div class="header">Supprimer</div>
     <div class="content">
         <p>Êtes-vous sûre de vouloir supprimer cette liste ?</p>
@@ -116,5 +116,27 @@ else{?>
         <div class="ui right labeled icon positive button"><i class="check circle icon"></i>Oui</div>
     </div>
 </div>
-<!-- end body -->
+<div class="ui modal" id="modCrea1">
+    <div class="header">Création de liste</div>
+    <div class="content">
+        <form name="creation1" class="ui form">
+            <div class="field">
+                <label ></label>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui negative button">Annuler</div>
+        <div class="ui right labeled icon positive button">Continuer</div>
+    </div>
+</div>
+    <div class="ui modal" id="modCrea2">
+    <div class="header">Création de vos couples</div>
+    <div class="content">
+
+    </div>
+    <div class="actions">
+        <div class="ui right labeled icon positive button">Continuer</div>
+    </div>
+</div>
 <?php }?>
