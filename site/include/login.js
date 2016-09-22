@@ -30,7 +30,7 @@ $(function () {
 				 	password: $("#formLogin input[name='password']").val()
 				 },
 				function (data) {
-					if(data["result"] == false){
+					if(data["result"] == true){
 						location.reload(true);
 					}
 					else {
