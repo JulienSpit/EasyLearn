@@ -43,10 +43,10 @@ Mes listes
             if (count($lignes) > 0) {
                 for ($i = 0; $i < count($lignes); $i++) {
                     ?>
-                    <tr data-id="<?= $lignes[$i]->Prk_List ?>">
-                        <td><?php echo $lignes[$i]->ListName; ?></td>
-                        <td><?php echo $lignes[$i]->ExerciseName; ?></td>
-                        <td><?php echo $lignes[$i]->ThemeName; ?></td>
+                    <tr data-id="<?=$lignes[$i]->Prk_List?>">
+                        <td><?=$lignes[$i]->ListName?></td>
+                        <td><?=$lignes[$i]->ExerciseName?></td>
+                        <td><?=$lignes[$i]->ThemeName?></td>
                         <?php
                         if ($lignes[$i]->ListState) {
                             ?>
@@ -56,7 +56,7 @@ Mes listes
                             <td class="negative"><i class="remove circle icon"></i></td>
                         <?php } ?>
                         <td class="three wide center aligned">
-                            <div class="ui buttons">
+                            <div class="ui mini buttons">
                                 <button class="ui button">
                                     <i class="ellipsis horizontal icon"></i>
                                     Modifier

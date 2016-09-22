@@ -27,10 +27,10 @@ include (APP_PATH."/include/header.php");
 		include (APP_PATH."/listes.php");
 		include (APP_PATH."/results.php");
 		?>
-		<div class="row">
-			<div class="ui vertical segment">
-				<img class="ui centered medium image" src="/EasyLearn/site/images/cesi.png">
-			</div>
+	</div>
+	<div class="centered row">
+		<div class="ui vertical segment">
+			<img class="ui centered medium image" src="/EasyLearn/site/images/cesi.png">
 		</div>
 	</div>
 </div>
