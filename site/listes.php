@@ -2,7 +2,8 @@
 <?php
 if(isset($_POST["action"])) {
     switch ($_POST["action"]){
-        case "supprimer": ?><h1>SUPPRIMER</h1><?php
+        case "supprimer":
+            //$_POST["id"]
             break;
     }
 }
@@ -35,9 +36,10 @@ Mes listes
             $lignes = $bd->query(
                 "SELECT List.Prk_List, List.Name as ListName, Exercise.Name as ExerciseName, Theme.Name as ThemeName, List.State as ListState
 						FROM List INNER JOIN Exercise ON List.FrK_Exercise = Exercise.PrK_Exercise INNER JOIN Theme ON List.FrK_Theme = Theme.PrK_Theme
-						WHERE List.FrK_Account = 1
+						WHERE List.FrK_Account = :id
 						ORDER BY List.Name ASC;",
-                array(/*":id" => $user->id*/
+                array(
+                    ":id" => $User->getId()
                 )
             );
             if (count($lignes) > 0) {
