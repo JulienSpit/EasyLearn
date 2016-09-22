@@ -4,6 +4,18 @@ if(isset($_POST["action"])) {
     switch ($_POST["action"]){
         case "supprimer":
             //$_POST["id"]
+            $bd->query(
+                "DELETE FROM List WHERE List.Prk_List = :id;",
+                array(
+                    ":id" => $_POST["id"]
+                )
+            );
+            $bd->query(
+                "DELETE FROM Couple WHERE Couple.FrK_List = :id;",
+                array(
+                    ":id" => $_POST["id"]
+                )
+            );
             break;
     }
 }
