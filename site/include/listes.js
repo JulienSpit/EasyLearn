@@ -1,5 +1,5 @@
 $(function () {
-    $(".ui.negative.button").click(
+    $("tr td:last .ui.negative.button").click(
         function (e) {
             $('.ui.modal.modSuppr')
                 .modal({
@@ -24,6 +24,14 @@ $(function () {
             ;
         }
     );
-
+    $('.coupled.modal').modal({
+        allowMultiple: false
+    });
+    $(".addList").click(function () {
+        $('#modCrea1').modal({
+                closable: false
+        }).modal("show");
+    });
+    $("#modCrea2").modal('attach events', '#modCrea1 .positive.button');
 
 });
