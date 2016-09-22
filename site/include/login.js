@@ -22,7 +22,6 @@ $(function () {
 			return false;
 		},
 		onSuccess: function (event, fields) {
-console.log(fields);
 			$.post(
 				 "login.php",
 				 {
@@ -31,12 +30,8 @@ console.log(fields);
 				 	password: $("#formLogin input[name='password']").val()
 				 },
 				function (data) {
-					if(data["result"] == true){
-						$("#formLogin").hide();
-						$("#horizMenu").find(".right.borderless.item").append(data["html"]);
-						formDeconnexion();
-						$("#horizMenu .item:last .button").hide();
-						$("#horizMenu .item:last").append(data["html2"]);
+					if(data["result"] == false){
+						location.reload(true);
 					}
 					else {
 						$("#formLogin .item").addClass("error");
@@ -49,7 +44,25 @@ console.log(fields);
 	});
 
 	if($("#formLogout")){
-		formDeconnexion();
+		$("#formLogout").form({
+			on: "submit",
+			onSuccess: function (event) {
+				$.post(
+					"login.php",
+					{
+						mode:"deconnexion"
+					},
+					function (data) {
+						if(data["result"] == true){
+							location.reload(true);
+						}
+
+					},
+					"json"
+				);
+				event.preventDefault();
+			}
+		});
 	}
 	// formulaire de creation de compte
 	$("#newCompte").form({
@@ -82,7 +95,6 @@ console.log(fields);
 					},
 					function (data) {
 						if(data["result"] == true){
-							alert("Création réussie");
 							header.location("index.php");
 						}
 						else {
@@ -124,27 +136,4 @@ function verifyUsername (username){
 		},
 		"json"
 	);
-}
-
-function formDeconnexion (){
-	// formulaire de deconnexion
-	$("#formLogout").form({
-		on: "submit",
-		onSuccess: function (event) {
-			$.post(
-				"login.php",
-				{
-					login: $("#formLogout input[name='login']").val()
-				},
-				function (data) {
-					if(data["result"] == true){
-						$("#formLogout").remove();
-					}
-
-				},
-				"json"
-			);
-			event.preventDefault();
-		}
-	});
 }

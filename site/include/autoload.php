@@ -1,8 +1,6 @@
 <?php
 define("APP_PATH", "../site");
-include ("User.php");
 session_start();
-
 function __autoload($class_name){
     if(!@include_once APP_PATH."/include/".mb_strtolower($class_name).".php"){
         if(!@include_once "../include/".mb_strtolower($class_name).".php") {
@@ -13,3 +11,4 @@ function __autoload($class_name){
 if(!isset($bd)) {
 	$bd = new Bd(APP_PATH . '/DataBase.db');
 }
+

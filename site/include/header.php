@@ -1,3 +1,6 @@
+<?php
+require_once("include/autoload.php");
+?>
 <!doctype html>
 <head>
 	<meta charset="utf-8">
@@ -21,7 +24,7 @@
 <div class="container">
 	<?php /* menu horizontale */?>
 	<div class="ui inverted menu" id="horizMenu">
-		<a class="item" href="/EasyLearn/">
+		<a class="item" href="/EasyLearn/site/index.php">
 			<div class="menu">
 				<div class="vertically fitted borderless item">
 					<div class="labeled icon">
@@ -34,15 +37,17 @@
 				</div>
 			</div>
 		</a>
-		<?php if(isset($User)){?>
+		<?php if(isset($_SESSION["User"])){?>
 		<div class="right borderless item">
 			<form class="ui form" id="formLogout">
 				<input type="hidden" name="mode" value="deconnexion"/>
-				<div class="field">
-					<label>Bonjour <?=$User->getNom();?> !</label>
-				</div>
 				<div class="ui submit button">Déconnexion</div>
 			</form>
+		</div>
+		<div class="item">
+			<div class="ui primary button">
+				<a href="compte.php">Mon compte</a>
+			</div>
 		</div>
 		<?php }
 		else { ?>
@@ -61,7 +66,7 @@
 		</div>
 		<div class="item">
 			<div class="ui primary button">
-				<a href="site/login.php">Créer un compte</a>
+				<a href="login.php">Créer un compte</a>
 			</div>
 		</div>
 		<?php } ?>

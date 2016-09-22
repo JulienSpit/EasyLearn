@@ -1,6 +1,8 @@
 <!-- traitement des appels ajax -->
 <?php
+include_once ("include/autoload.php");
 if(isset($_POST["action"])) {
+
     switch ($_POST["action"]){
         case "supprimer":
             //$_POST["id"]
@@ -39,7 +41,7 @@ Mes listes
 						WHERE List.FrK_Account = :id
 						ORDER BY List.Name ASC;",
                 array(
-                    ":id" => $User->getId()
+                    ":id" => $_SESSION["User"]->getId()
                 )
             );
             if (count($lignes) > 0) {

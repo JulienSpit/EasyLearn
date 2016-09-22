@@ -1,60 +1,51 @@
 <?php
 	class User
 	{
-		private $id;
-		private $nom;
-		private $pwd;
+		protected $id;
+		protected $nom;
+		protected $pwd;
 
-		/**
-		 * @return mixed
-		 */
+		public function __construct($id, $nom, $pwd)
+		{
+			$this->setId($id);
+			$this->setNom($nom);
+			$this->setPwd($pwd);
+		}
+/* setter */
+		public function setId($id)
+		{
+			if (!isset($this->id)) {
+				$this->id = $id;
+			}
+		}
+
+		public function setNom($nom)
+		{
+			if (!isset($this->nom)) {
+				$this->nom = $nom;
+			}
+		}
+
+		public function setPwd($pwd)
+		{
+			if (!isset($this->pwd)) {
+				$this->pwd = $pwd;
+			}
+		}
+/* getter */
 		public function getId()
 		{
 			return $this->id;
 		}
 
-		/**
-		 * @param mixed $id
-		 */
-		public function setId($id)
-		{
-			$this->id = $id;
-		}
-		/**
-		 * @return mixed
-		 */
 		public function getNom()
 		{
 			return $this->nom;
 		}
 
-		/**
-		 * @param mixed $nom
-		 */
-		public function setNom($nom)
-		{
-			$this->nom = $nom;
-		}
-		/**
-		 * @return mixed
-		 */
 		public function getPwd()
 		{
 			return $this->pwd;
-		}
-
-		/**
-		 * @param mixed $pwd
-		 */
-		public function setPwd($pwd)
-		{
-			$this->pwd = $pwd;
-		}
-
-		public  function logIn($id, $nom, $pwd){
-			$this->setId($id);
-			$this->setNom($nom);
-			$this->setPwd($pwd);
 		}
 	}
 ?>
