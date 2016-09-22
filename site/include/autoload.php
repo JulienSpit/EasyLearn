@@ -1,5 +1,5 @@
 <?php
-define("APP_PATH", "/Applications/MAMP/htdocs/EasyLearn/site");
+define("APP_PATH", "../site");
 include ("User.php");
 session_start();
 

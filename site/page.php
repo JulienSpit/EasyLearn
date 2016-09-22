@@ -1,5 +1,5 @@
 <?php
-require_once ("site/include/autoload.php");
+require_once ("include/autoload.php");
 include (APP_PATH."/include/header.php");
 ?>
 <div class="ui stackable grid">

@@ -9,7 +9,7 @@ $(function () {
                     },
                     onApprove: function () {
                         $.post(
-                            "site/listes.php",
+                            "istes.php",
                             {
                                 action: "supprimer",
                             },

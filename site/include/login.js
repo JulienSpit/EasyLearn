@@ -24,7 +24,7 @@ $(function () {
 		onSuccess: function (event, fields) {
 console.log(fields);
 			$.post(
-				 "site/login.php",
+				 "login.php",
 				 {
 				 	mode: "connexion",
 				 	login: $("#formLogin input[name='login']").val(),
@@ -132,7 +132,7 @@ function formDeconnexion (){
 		on: "submit",
 		onSuccess: function (event) {
 			$.post(
-				"site/login.php",
+				"login.php",
 				{
 					login: $("#formLogout input[name='login']").val()
 				},
