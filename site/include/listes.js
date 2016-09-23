@@ -49,4 +49,16 @@ $(function () {
             ;
         }
     );
+
+    $('.coupled.modal').modal({
+        allowMultiple: false
+    });
+
+    $(".addList").click(function () {
+        $('#modCrea1').modal({
+                closable: false
+        }).modal("show");
+    });
+
+    $("#modCrea2").modal('attach events', '#modCrea1 .positive.button');
 });
