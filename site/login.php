@@ -48,9 +48,7 @@ if(isset($_POST["mode"])) {
 						":password" => password_hash($_POST["password"], PASSWORD_BCRYPT)
 					)
 				);
-
-				$User = new User();
-				$User->logIn($bd->last_insert_id(), $_POST["login"], password_hash($_POST["password"], PASSWORD_BCRYPT));
+				$_SESSION["User"] = new User($bd->last_insert_id(), $_POST["login"], $_POST["password"]);
 				$retour->result = true;
 			}
 			else {
