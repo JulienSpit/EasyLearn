@@ -31,7 +31,13 @@ $(function () {
 				 },
 				function (data) {
 					if(data["result"] == true){
-						location.reload(true);
+						if(location.pathname.indexOf("login.php")){
+							location.href= "index.php";
+						}
+						else {
+							location.reload(true);
+						}
+
 					}
 					else {
 						$("#formLogin .item").addClass("error");
@@ -95,7 +101,7 @@ $(function () {
 					},
 					function (data) {
 						if(data["result"] == true){
-							header.location("index.php");
+							location="index.php";
 						}
 						else {
 							$("#newCompte .item").addClass("error");
