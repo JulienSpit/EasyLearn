@@ -5,6 +5,7 @@ if(isset($_POST["action"])) {
     $retour->result = false;
     switch ($_POST["action"]){
         case "supprimer":
+            //$_POST["id"]
             $bd->query(
                 "DELETE FROM List WHERE List.Prk_List = :id;",
                 array(
@@ -19,20 +20,6 @@ if(isset($_POST["action"])) {
             );
             $retour->result = true;
             break;
-
-        case "modifier":
-            $lignes = $bd->query(
-                "SELECT Couple.Item1, Couple.Item2 FROM Couple WHERE Couple.FrK_List = :id;",
-                array(
-                    ":id" => $_POST["id"]
-                )
-            );
-            //header tableau
-            if (count($lignes) > 0) {
-                for ($i = 0; $i < count($lignes); $i++) {
-                    //corps code
-                }
-            }
         default: return;
     }
     echo json_encode($retour);
@@ -90,7 +77,7 @@ else{?>
                                 <?php } ?>
                                 <td class="three wide center aligned">
                                     <div class="ui mini buttons">
-                                        <button class="ui edit button">
+                                        <button class="ui button">
                                             <i class="ellipsis horizontal icon"></i>
                                             Modifier
                                         </button>
@@ -106,7 +93,7 @@ else{?>
                     ?>
                     <tr>
                         <td colspan="5">
-                            <div class="ui primary button">
+                            <div class="ui primary button addList">
                                 <i class="plus square outline icon"></i>
                                 Ajouter
                             </div>
@@ -120,7 +107,7 @@ else{?>
     <?php }?>
 </div>
 <div class="ui modal modSuppr">
-    <div class="header">Suppression</div>
+    <div class="header">Supprimer</div>
     <div class="content">
         <p>Êtes-vous sûre de vouloir supprimer cette liste ?</p>
     </div>
@@ -129,15 +116,76 @@ else{?>
         <div class="ui right labeled icon positive button"><i class="check circle icon"></i>Oui</div>
     </div>
 </div>
-<div class="ui modal modEdit">
-    <div class="header">Modification</div>
+<div class="ui coupled modal" id="modCrea1">
+    <div class="header">Création de liste</div>
     <div class="content">
-        //affichage
+        <form name="creation1" class="ui form">
+            <div class="field">
+                <label>Nom</label>
+                <input type="text" name="listName"/>
+            </div>
+            <div class="inline fields">
+                <div class="field">
+                    <label>Public</label>
+                    <input type="radio" name="listPublic" value="1" checked>
+                </div>
+                <div class="field">
+                    <label>Privé</label>
+                    <input type="radio" name="listPublic" value="0">
+                </div>
+            </div>
+            <div class="field">
+                <label>Exercice</label>
+                <select name="listExo" class="ui dropdown">
+                    <option value="">Exercice</option>
+                    <?php
+                    $ex = $bd->query("SELECT * FROM Exercise");
+                    for ($i = 0; $i < count($ex); $i++) {?>
+                        <option value="<?=$ex[$i]->PrK_Exercise?>"><?=$ex[$i]->Name?></option>
+                    <?}?>
+                </select>
+            </div>
+            <div class="field">
+                <label>Theme</label>
+                <select name="listTheme" class="ui dropdown">
+                    <option value="">Theme</option>
+                    <?php
+                        $themes = $bd->query("SELECT * FROM Theme");
+                        for ($i = 0; $i < count($themes); $i++) {?>
+                            <option value="<?=$themes[$i]->PrK_Theme?>"><?=$themes[$i]->Name?></option>
+                        <?}?>
+                </select>
+            </div>
+        </form>
     </div>
     <div class="actions">
-        <div class="ui button">retour</div>
-        <div class="ui right labeled icon positive button"><i class="check circle icon"></i>Valider</div>
+        <div class="ui negative button">Annuler</div>
+        <div class="ui positive button">Continuer</div>
     </div>
 </div>
-<!-- end body -->
+    <div class="ui coupled modal" id="modCrea2">
+    <div class="header">Création de vos mots</div>
+    <div class="content">
+        <form name="creation2" class="ui form">
+            <div class="inline fields">
+                <div class="field">
+                    <label>Mot n°1</label>
+                    <input type="text" name="Item1"/>
+                </div>
+                <div class="field">
+                    <label>Mot n°2</label>
+                    <input type="text" name="Item2"/>
+                </div>
+                <div class="field">
+                    <button class="ui icon button">
+                        <i class="plus icon"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui positive button">Continuer</div>
+    </div>
+</div>
 <?php }?>
