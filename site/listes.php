@@ -34,6 +34,52 @@ if (isset($_POST["action"])) {
 				}
 			}
 			break;
+		case "sauvegarder":
+			if(!empty($_POST["datas"])){
+				if(!empty($_POST["datas"]["listId"])){
+					/* modification liste */
+					$bd->query_unique("UPDATE List SET Name = '".addslashes($_POST["datas"]["listName"])."', State = '".$_POST["datas"]["listPublic"]."', Frk_Exercise = '".$_POST["datas"]["listExo"]."', FrK_Theme = '".$_POST["datas"]["listTheme"]."' WHERE PrK_List = ".$_POST["datas"]["listId"].";");
+					$retour->id = $_POST["datas"]["listId"];
+				}
+				else {
+					/* creation liste */
+					$bd->query_unique("INSERT INTO List ('Name', 'State', 'FrK_Account', 'FrK_Exercise', 'FrK_Theme') VALUES ('".addslashes($_POST["datas"]["listName"])."', '".$_POST["datas"]["listPublic"]."', '".$_SESSION["User"]->getId()."', '".$_POST["datas"]["listExo"]."', '".$_POST["datas"]["listTheme"]."');");
+					$retour->id = $bd->last_insert_id();
+				}
+				$retour->result = true;
+			}
+			break;
+		case "sauvegarderCouple":
+			if(!empty($_POST["datas"])) {
+				if (!empty($_POST["datas"]["listId"])) {
+					// on supprime tous les couples deja present pour cette liste
+					$bd->query_unique("DELETE FROM Couple WHERE FrK_List = " . $_POST["datas"]["listId"] . ";");
+				}
+				$item1 = "";
+				foreach ($_POST["datas"] as $key => $val){
+					if($key != "listId") {
+						if(preg_match("/Item[0-9]+_1/i", $key)){
+							$item1 = $val;
+						}
+						else {
+							$bd->query_unique("INSERT INTO Couple ('Item1', 'Item2', 'FrK_List') VALUES ('".$item1."', '".$val."', '".$_POST["datas"]["listId"]."');");
+						}
+					}
+				}
+				$retour->result = true;
+			}
+			break;
+		case "getListe":
+			$liste = $bd->query("SELECT * FROM List WHERE PrK_List = ".$_POST["id"].";");
+			$retour->liste = $liste;
+			$retour->result = true;
+			break;
+		case "getCouples":
+			$couple = $bd->query("SELECT * FROM Couple WHERE FrK_List = ".$_POST["id"].";");
+			$retour->couple = $couple;
+			$retour->result = true;
+			break;
+
 		default:
 			return;
 	}
@@ -98,7 +144,7 @@ else{
 										<i class="ellipsis horizontal icon"></i>
 										Modifier
 									</button>
-									<button class="ui negative button">
+									<button class="ui negative remove button">
 										<i class="remove icon"></i>
 										Supprimer
 									</button>
@@ -132,37 +178,32 @@ else{
 			<div class="ui right labeled icon positive button"><i class="check circle icon"></i>Oui</div>
 		</div>
 	</div>
-	<div class="ui modal modEdit">
-		<div class="header">Modification</div>
-		<div class="content">
-			//affichage
-		</div>
-		<div class="actions">
-			<div class="ui button">retour</div>
-			<div class="ui right labeled icon positive button"><i class="check circle icon"></i>Valider</div>
-		</div>
-	</div>
 	<div class="ui coupled modal" id="modCrea1">
 		<div class="header">Création de liste</div>
 		<div class="content">
 			<form name="creation1" class="ui form">
-				<div class="field">
+				<input type="hidden" name="listId" id="listId"/>
+				<div class="required field">
 					<label>Nom</label>
-					<input type="text" name="listName"/>
+					<input type="text" name="listName" id="listName"/>
 				</div>
-				<div class="inline fields">
+				<div class="inline required fields">
 					<div class="field">
-						<label>Public</label>
-						<input type="radio" name="listPublic" value="1" checked>
+						<div class="ui radio checkbox">
+							<label>Public</label>
+							<input type="radio" name="listPublic" value="1" checked="checked">
+						</div>
 					</div>
 					<div class="field">
-						<label>Privé</label>
-						<input type="radio" name="listPublic" value="0">
+						<div class="ui radio checkbox">
+							<label>Privé</label>
+							<input type="radio" name="listPublic" value="0">
+						</div>
 					</div>
 				</div>
-				<div class="field">
+				<div class="required field">
 					<label>Exercice</label>
-					<select name="listExo" class="ui dropdown">
+					<select name="listExo" id="listExo" class="ui dropdown">
 						<option value="">Exercice</option>
 						<?php
 						$ex = $bd->query("SELECT * FROM Exercise");
@@ -171,9 +212,9 @@ else{
 						<? } ?>
 					</select>
 				</div>
-				<div class="field">
+				<div class="required field">
 					<label>Theme</label>
-					<select name="listTheme" class="ui dropdown">
+					<select name="listTheme" id="listTheme" class="ui dropdown">
 						<option value="">Theme</option>
 						<?php
 						$themes = $bd->query("SELECT * FROM Theme");
@@ -190,20 +231,21 @@ else{
 		</div>
 	</div>
 	<div class="ui coupled modal" id="modCrea2">
-		<div class="header">Création de vos mots</div>
+		<div class="header">Création de vos couples</div>
 		<div class="content">
 			<form name="creation2" class="ui form">
+				<input type="hidden" name="listId">
 				<div class="inline fields">
 					<div class="field">
-						<label>Mot n°1</label>
-						<input type="text" name="Item1"/>
+						<label>Item n°1</label>
+						<input type="text" name="Item1_1"/>
 					</div>
 					<div class="field">
-						<label>Mot n°2</label>
-						<input type="text" name="Item2"/>
+						<label>Item n°2</label>
+						<input type="text" name="Item1_2"/>
 					</div>
 					<div class="field">
-						<button class="ui icon button">
+						<button class="ui icon button addCouple">
 							<i class="plus icon"></i>
 						</button>
 					</div>
@@ -211,6 +253,7 @@ else{
 			</form>
 		</div>
 		<div class="actions">
+			<div class="ui cancel button">Précedent</div>
 			<div class="ui negative button">Annuler</div>
 			<div class="ui positive button">Continuer</div>
 		</div>
